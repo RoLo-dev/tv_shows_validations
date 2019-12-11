@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TV Shows | Add a Show</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="main-content flex">
+
+            <div class="col-1">
+                <h1>Add a New Show</h1>
+
+                <div class="danger">
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li {% if messages.tags %} class="{{ message.tags }}" {% endif %}>- {{message}}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <form action="/shows/create" class="flex-col" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="title" placeholder="Title">
+                    <input type="text" name="network" placeholder="Network">
+                    <input id="date" type="date" name="release_date">
+                    <textarea name="desc" class="textarea" placeholder="Description"></textarea>
+                    <input type="submit" class="form-btn bold" value="Create">
+                </form>
+
+            </div>
+            <div class="col-2">
+                <a href="/shows" class="outline-btn">Go back</a>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
